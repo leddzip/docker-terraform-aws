@@ -30,7 +30,7 @@ jobs:
           echo <<parameters.env>>
       - run: |
           source args
-          envsubst < template.dockerfile > Dockerfile
+          envsubst "`printf '${%s} ' $(cat args | cut -d' ' -f2 | cut -d'=' -f1)`" < template.dockerfile > Dockerfile
       - run: |
           ls
           cat Dockerfile
