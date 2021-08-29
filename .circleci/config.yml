@@ -25,6 +25,7 @@ jobs:
           echo test
           echo <<parameters.env>>
           docker --version
+          make --version
       - run: |
           echo tester
           echo <<parameters.env>>
