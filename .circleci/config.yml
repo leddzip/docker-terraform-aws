@@ -28,6 +28,12 @@ jobs:
       - run: |
           echo tester
           echo <<parameters.env>>
+      - run: |
+          source args
+          envsubst < template.dockerfile > Dockerfile
+      - run: |
+          ls
+          cat Dockerfile
 
 workflows:
   "Build develop":
