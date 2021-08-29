@@ -28,4 +28,12 @@ jobs:
           echo tester
           echo <<parameters.env>>
 
+workflows:
+  "Build develop":
+    jobs:
+      - build:
+          <<: *docker_context
+          <<: *develop_filter
+          env: dev
+
 
