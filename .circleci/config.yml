@@ -1,0 +1,31 @@
+version: 2.1
+
+docker_context: &docker_context
+  context:
+    - Leddzip Dockerhub
+
+develop_filter: &develop_filter
+  filters:
+    branches:
+      only: develop
+master_filter: &master_filter
+  filters:
+    branches:
+      only: master
+
+jobs:
+  build:
+    machine: true
+    parameters:
+      env:
+        type: string
+    steps:
+      - checkout
+      - run: |
+          echo test
+          echo <<parameters.env>>
+      - run: |
+          echo tester
+          echo <<parameters.env>>
+
+
