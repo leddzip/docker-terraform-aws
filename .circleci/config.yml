@@ -33,10 +33,16 @@ jobs:
           echo <<parameters.env>>
       - run: |
           source args
-          envsubst "`printf '${%s} ' $(cat args | cut -d' ' -f2 | cut -d'=' -f1)`" < template.dockerfile > Dockerfile
+          envsubst "`printf '${%s} ' $(cat args | cut -d' ' -f2 | cut -d'=' -f1)`" < Dockerfile.template > Dockerfile
       - run: |
           ls
           cat Dockerfile
+      - run: |
+          if [[ -z "${CIRCLECI}" ]]; then
+            echo "this is inside CI"
+          else
+            echo "this is not inside CI"
+          fi
 
 workflows:
   "Build develop":
