@@ -39,6 +39,7 @@ jobs:
           ls
           cat Dockerfile
       - run: |
+          bash ./build-scripts/build-env-prefix.sh
           make print
 
 workflows:
