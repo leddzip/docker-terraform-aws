@@ -40,7 +40,6 @@ jobs:
           cat Dockerfile
       - run: |
           export ENV_TARGET=<<parameters.env>>
-          bash ./build-scripts/build-env-prefix.sh
           make print
 
 workflows:
