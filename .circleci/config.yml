@@ -22,6 +22,7 @@ jobs:
     steps:
       - checkout
       - run: |
+          export ENV_TARGET=<<parameters.env>>
           echo test
           echo <<parameters.env>>
           docker --version
@@ -38,11 +39,7 @@ jobs:
           ls
           cat Dockerfile
       - run: |
-          if [[ -z "${CIRCLECI}" ]]; then
-            echo "this is inside CI"
-          else
-            echo "this is not inside CI"
-          fi
+          make print
 
 workflows:
   "Build develop":
