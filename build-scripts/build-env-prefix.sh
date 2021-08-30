@@ -7,9 +7,6 @@ set -e
 # Only the prod environment should not contains any prefix
 #
 
-echo "the CIRCLECI Env is '$CIRCLECI'"
-echo "the ENV_TARGET Env is '$ENV_TARGET'"
-
 if [ -z ${CIRCLECI+x} ]; then
   # We are not in the CircleCI CI/CD Workflow
   # So we are most certainly in a local environment
