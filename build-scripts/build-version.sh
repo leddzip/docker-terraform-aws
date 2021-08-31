@@ -1,0 +1,24 @@
+set -e
+
+[ -z "$INJECT_AWS_CLI_VERSION" ] && exit 1
+[ -z "$INJECT_TERRAFORM_VERSION" ] && exit 2
+[ -z "$INJECT_BASH_VERSION" ] && exit 3
+
+case "$1" in
+  major)
+    BASH_VERSION=$(echo "$INJECT_BASH_VERSION" | cut -d. -f1)
+    TERRAFORM_VERSION=$(echo "$INJECT_TERRAFORM_VERSION" | cut -d. -f1)
+    AWS_CLI_VERSION=$(echo "$INJECT_AWS_CLI_VERSION" | cut -d. -f1)
+    ;;
+  minor)
+    BASH_VERSION=$(echo "$INJECT_BASH_VERSION" | cut -d. -f1-2)
+    TERRAFORM_VERSION=$(echo "$INJECT_TERRAFORM_VERSION" | cut -d. -f1-2)
+    AWS_CLI_VERSION=$(echo "$INJECT_AWS_CLI_VERSION" | cut -d. -f1-2)
+    ;;
+  debug)
+    BASH_VERSION="$INJECT_BASH_VERSION"
+    TERRAFORM_VERSION="$INJECT_TERRAFORM_VERSION"
+    AWS_CLI_VERSION="$INJECT_AWS_CLI_VERSION"
+esac
+
+echo  "${BASH_VERSION}_${TERRAFORM_VERSION}_${AWS_CLI_VERSION}"

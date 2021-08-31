@@ -3,3 +3,7 @@ ARG TERRAFORM_VERSION=$INJECT_TERRAFORM_VERSION
 ARG BASH_VERSION=$INJECT_BASH_VERSION
 
 FROM bash:${BASH_VERSION}
+
+#COPY docker-entrypoint.sh /usr/local/bin
+ENTRYPOINT ["docker-entrypoint.sh"]
+CMD ["bash"]

@@ -1,6 +1,12 @@
 Terraform AWS
 =============
 
+> TODO: 
+> * explain how the tags and version are build for the taging of the images
+> * explain how the project version is built
+> * explain how the env variables are injected inside the final Dockerfile
+> 
+
 This project provide a docker image (deployed inside DockerHUB)
 to execute terraform with aws-cli v2 in a bash context.
 
