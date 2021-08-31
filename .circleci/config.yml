@@ -15,7 +15,8 @@ master_filter: &master_filter
 
 jobs:
   build-and-push:
-    machine: true
+    machine:
+      image: ubuntu-2004:202107-02
     parameters:
       env:
         type: string
