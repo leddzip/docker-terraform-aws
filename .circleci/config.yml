@@ -14,7 +14,7 @@ master_filter: &master_filter
       only: master
 
 jobs:
-  build:
+  build-and-push:
     machine: true
     parameters:
       env:
@@ -23,29 +23,15 @@ jobs:
       - checkout
       - run: |
           export ENV_TARGET=<<parameters.env>>
-          echo test
-          echo <<parameters.env>>
-          docker --version
-          make --version
-          echo $SHELL
-          bash --version
-      - run: |
-          echo tester
-          echo <<parameters.env>>
-      - run: |
-          source args
-          envsubst "`printf '${%s} ' $(cat args | cut -d' ' -f2 | cut -d'=' -f1)`" < Dockerfile.template > Dockerfile
-      - run: |
-          ls
-          cat Dockerfile
-      - run: |
-          export ENV_TARGET=<<parameters.env>>
-          make print
+          make generate-dockerfile
+          echo "$MY_CIRCLECI_DOCKERHUB_PASSWORD" | docker login --username $MY_CIRCLECI_DOCKERHUB_USERNAME --password-stdin
+          make docker-build
+          make docker-push
 
 workflows:
   "Build develop":
     jobs:
-      - build:
+      - build-and-push:
           <<: *docker_context
           <<: *develop_filter
           env: dev
