@@ -36,5 +36,11 @@ workflows:
           <<: *docker_context
           <<: *develop_filter
           env: dev
+  "Build production":
+    jobs:
+      - build-and-push:
+          <<: *docker_context
+          <<: *develop_filter
+          env: prod
 
 
