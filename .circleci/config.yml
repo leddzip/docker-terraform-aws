@@ -40,7 +40,7 @@ workflows:
     jobs:
       - build-and-push:
           <<: *docker_context
-          <<: *develop_filter
+          <<: *master_filter
           env: prod
 
 
