@@ -6,7 +6,11 @@ ARG AWS_CLI_VERSION=$INJECT_AWS_CLI_VERSION
 # Install base requirements
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y wget unzip
+    apt-get install -y wget \
+                       unzip \
+                       git \
+                       ssh \
+                       ca-certificates
 
 # Install terraform dependency
 RUN set -eux && \
