@@ -4,6 +4,10 @@ ARG TERRAFORM_VERSION=$INJECT_TERRAFORM_VERSION
 ARG AWS_CLI_VERSION=$INJECT_AWS_CLI_VERSION
 
 # Install base requirements
+ENV TZ=Europe/Paris
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
+    echo $TZ > /etc/timezone
+
 RUN apt-get update && \
     apt-get upgrade -y && \
     apt-get install -y wget \
@@ -32,7 +36,7 @@ RUN set -eux && \
         aws \
         /usr/local/aws-cli/v2/*/dist/aws_completer \
         /usr/local/aws-cli/v2/*/dist/awscli/data/ac.index \
-        /usr/local/aws-cli/v2/*/dist/awscli/examples \
+        /usr/local/aws-cli/v2/*/dist/awscli/examples
 
 CMD ["bash"]
 
