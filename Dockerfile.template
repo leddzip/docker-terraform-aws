@@ -3,6 +3,9 @@ FROM ubuntu:$INJECT_UBUNTU_VERSION
 ARG TERRAFORM_VERSION=$INJECT_TERRAFORM_VERSION
 ARG AWS_CLI_VERSION=$INJECT_AWS_CLI_VERSION
 
+# create target workdir
+RUN mkdir /workdir
+
 # Install base requirements
 ENV TZ=Europe/Paris
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && \
@@ -40,5 +43,6 @@ RUN set -eux && \
         /usr/local/aws-cli/v2/*/dist/awscli/data/ac.index \
         /usr/local/aws-cli/v2/*/dist/awscli/examples
 
+WORKDIR /workdir
 CMD ["bash"]
 
